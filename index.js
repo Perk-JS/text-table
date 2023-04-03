@@ -1,8 +1,8 @@
 const stringLengthFn = (s) => ('' + s).length
 
 const dotindex = (c) => {
-    var m = /\.[^.]*$/.exec(c);
-    return m ? m.index + 1 : c.length;
+    const index = c.lastIndexOf('.');
+    return index > -1 ? index + 1 : c.length
 }
 
 function main(rows_, opts = {}) {
@@ -28,7 +28,7 @@ function main(rows_, opts = {}) {
             const column = '' + column_
             if (align[index] === '.') {
                 const size = dotsizes[index] + (/\./.test(column) ? 1 : 2) - (stringLength(column) - dotindex(column));
-                return column + Array(size).join(' ');
+                return column + ' '.repeat(size - 1);
             }
             return column
         })
@@ -47,13 +47,13 @@ function main(rows_, opts = {}) {
     return rows.map(row =>
         row.map((column, index) => {
             const padLength = (sizes[index] - stringLength(column)) || 0;
-            const pad = Array(Math.max(padLength + 1, 1)).join(' ');
+            const pad = ' '.repeat(Math.max(padLength, 0));
             if (align[index] === 'r' || align[index] === '.') {
                 return pad + column;
             }
 
             if (align[index] === 'c') {
-                return Array(Math.ceil(padLength / 2 + 1)).join(' ') + column + Array(Math.floor(padLength / 2 + 1)).join(' ');
+                return ' '.repeat(Math.ceil(padLength / 2)) + column + ' '.repeat(Math.floor(padLength / 2));
             }
 
             return column + pad
