@@ -1,4 +1,5 @@
 const textTable = require('text-table');
+const perkTextTableGit = require('perkjs-text-table-git');
 const perkTextTable100 = require('perkjs-text-table-100');
 const Benchmark = require('benchmark');
 
@@ -15,6 +16,7 @@ const template = [
 const options = { align: [ 'l', '.' ] };
 
 bench.add('Original text-table', () => textTable(template, options));
+bench.add('@perkjs/text-table master branch', () => perkTextTableGit(template, options));
 bench.add('@perkjs/text-table v1.0.0', () => perkTextTable100(template, options));
 bench.on('cycle', (event) => console.log(String(event.target)));
 bench.run();
