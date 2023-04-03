@@ -4,7 +4,22 @@
 
 generate borderless text table strings suitable for printing to stdout
 
-# example
+# Install
+
+With [npm](https://npmjs.org) do:
+
+```
+npm install @perkjs/text-table
+```
+
+# Benchmark
+
+```
+Original text-table x 200,829 ops/sec ±1.48% (84 runs sampled)
+@perkjs/text-table v1.0.0 x 226,174 ops/sec ±1.53% (88 runs sampled)
+```
+
+# Example
 
 ## default align
 
@@ -110,14 +125,6 @@ alignment types are:
 * `'r'` - right
 * `'c'` - center
 * `'.'` - decimal
-
-# install
-
-With [npm](https://npmjs.org) do:
-
-```
-npm install @perkjs/text-table
-```
 
 # Use with ANSI-colors
 
