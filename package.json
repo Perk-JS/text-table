@@ -6,6 +6,9 @@
   "scripts": {
     "test": "ava test/*.js"
   },
+  "files": [
+    "index.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Perk-JS/text-table.git"
