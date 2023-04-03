@@ -1,0 +1,34 @@
+{
+  "name": "@perkjs/text-table",
+  "version": "1.0.0",
+  "description": "borderless text tables with alignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Perk-JS/text-table.git"
+  },
+  "author": "Ilya Karpuk <Perkovec>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Perk-JS/text-table/issues"
+  },
+  "homepage": "https://github.com/Perk-JS/text-table#readme",
+  "keywords": [
+    "text",
+    "table",
+    "align",
+    "ascii",
+    "rows",
+    "tabular"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "ava": "^5.2.0",
+    "cli-color": "^2.0.3"
+  }
+}
