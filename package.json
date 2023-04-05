@@ -7,8 +7,10 @@
     "test": "ava test/*.js"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Perk-JS/text-table.git"
