@@ -1,4 +1,4 @@
-const stringLengthFn = (s) => ('' + s).length
+const stringLengthFn = (s) => s.length
 
 const dotindex = (c) => {
     const index = c.lastIndexOf('.');
@@ -12,10 +12,12 @@ function main(rows_, opts = {}) {
         stringLength = stringLengthFn,
     } = opts;
 
+    const rowsCount = rows_.length;
+    const columnCount = rows_[0].length;
     const dotsizes = [];
     let tempDotIndex;
-    for (let r = 0; r < rows_.length; ++r) {
-        for (let c = 0; c < rows_[r].length; ++c) {
+    for (let r = 0; r < rowsCount; ++r) {
+        for (let c = 0; c < columnCount; ++c) {
             tempDotIndex = dotindex(rows_[r][c]);
             if (!dotsizes[c] || tempDotIndex > dotsizes[c]) {
                 dotsizes[c] = tempDotIndex;
@@ -27,16 +29,16 @@ function main(rows_, opts = {}) {
         row.map((column_, index) => {
             const column = '' + column_
             if (align[index] === '.') {
-                const size = dotsizes[index] + (/\./.test(column) ? 1 : 2) - (stringLength(column) - dotindex(column));
-                return column + ' '.repeat(size - 1);
+                const size = dotsizes[index] + (+!column.includes('.')) - (stringLength(column) - dotindex(column));
+                return column + ' '.repeat(size);
             }
             return column
         })
     );
 
     const sizes = [];
-    for (r = 0; r < rows.length; ++r) {
-        for (c = 0; c < rows[r].length; ++c) {
+    for (r = 0; r < rowsCount; ++r) {
+        for (c = 0; c < columnCount; ++c) {
             const columnLength = stringLength(rows[r][c]);
             if (!sizes[c] || columnLength > sizes[c]) {
                 sizes[c] = columnLength;
@@ -53,11 +55,12 @@ function main(rows_, opts = {}) {
             }
 
             if (align[index] === 'c') {
-                return ' '.repeat(Math.ceil(padLength / 2)) + column + ' '.repeat(Math.floor(padLength / 2));
+                const half = Math.ceil(padLength / 2);
+                return ' '.repeat(half) + column + ' '.repeat(padLength - half);
             }
 
             return column + pad
-        }).join(hsep).replace(/\s+$/, '')
+        }).join(hsep).trimRight()
     ).join('\n');
 }
 
