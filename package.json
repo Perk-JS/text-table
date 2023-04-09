@@ -22,6 +22,8 @@
     "perkjs-text-table-git": "git+https://github.com/perk-js/text-table.git",
     "perkjs-text-table-100": "npm:@perkjs/text-table@^1.0.0",
     "perkjs-text-table-110": "npm:@perkjs/text-table@^1.1.0",
+    "perkjs-text-table-120": "npm:@perkjs/text-table@^1.2.0",
+    "perkjs-text-table-121": "npm:@perkjs/text-table@^1.2.1",
     "text-table": "^0.2.0",
     "tinybench": "^2.4.0"
   }
