@@ -15,10 +15,12 @@ npm install @perkjs/text-table
 # Benchmark
 
 ```
-Original text-table x 197,353 ops/sec ±1.60% (87 runs sampled)
-@perkjs/text-table v1.2.0 x 290,505 ops/sec ±1.32% (85 runs sampled)
-@perkjs/text-table v1.1.0 x 289,056 ops/sec ±1.38% (85 runs sampled)
-@perkjs/text-table v1.0.0 x 229,033 ops/sec ±1.47% (89 runs sampled)
+Original text-table x 197,473 ops/sec ±2.14% (85 runs sampled)
+@perkjs/text-table v1.3.0 x 367,456 ops/sec ±2.16% (86 runs sampled)
+@perkjs/text-table v1.2.1 x 347,403 ops/sec ±1.69% (80 runs sampled)
+@perkjs/text-table v1.2.0 x 330,972 ops/sec ±10.60% (81 runs sampled)
+@perkjs/text-table v1.1.0 x 289,422 ops/sec ±1.97% (85 runs sampled)
+@perkjs/text-table v1.0.0 x 209,862 ops/sec ±1.99% (81 runs sampled)
 ```
 
 # Example
