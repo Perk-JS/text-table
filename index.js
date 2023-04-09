@@ -2,7 +2,7 @@ const stringLengthFn = (s) => s.length
 
 const dotindex = (c) => {
     const index = c.lastIndexOf('.');
-    return index > -1 ? index + 1 : c.length
+    return index > -1 ? index : c.length
 }
 
 function main(rows_, opts = {}) {
@@ -14,49 +14,41 @@ function main(rows_, opts = {}) {
 
     const rowsCount = rows_.length;
     const columnCount = rows_[0].length;
-    const dotsizes = [];
-    let tempDotIndex;
+    const dotsizes = new Array(columnCount).fill(-1);
+    const sizes = new Array(columnCount).fill(-1);
+    let tempDotIndex, tempColumnLength;
     for (let r = 0; r < rowsCount; ++r) {
         for (let c = 0; c < columnCount; ++c) {
             tempDotIndex = dotindex(rows_[r][c]);
-            if (!dotsizes[c] || tempDotIndex > dotsizes[c]) {
+            tempColumnLength = stringLength(rows_[r][c]);
+            if (tempDotIndex > dotsizes[c]) {
                 dotsizes[c] = tempDotIndex;
             }
-        }
-    }
-
-    const rows = rows_.map(row =>
-        row.map((column_, index) => {
-            const column = '' + column_
-            if (align[index] === '.') {
-                const size = dotsizes[index] + (+!column.includes('.')) - (stringLength(column) - dotindex(column));
-                return column + ' '.repeat(size);
-            }
-            return column
-        })
-    );
-
-    const sizes = [];
-    for (r = 0; r < rowsCount; ++r) {
-        for (c = 0; c < columnCount; ++c) {
-            const columnLength = stringLength(rows[r][c]);
-            if (!sizes[c] || columnLength > sizes[c]) {
-                sizes[c] = columnLength;
+            if (tempColumnLength > sizes[c]) {
+                sizes[c] = tempColumnLength;
             }
         }
     }
 
-    return rows.map(row =>
+    let pad, rightPad, padLength, half, dotIndex;
+    return rows_.map(row =>
         row.map((column, index) => {
-            const padLength = (sizes[index] - stringLength(column)) || 0;
-            const pad = ' '.repeat(Math.max(padLength, 0));
-            if (align[index] === 'r' || align[index] === '.') {
+            padLength = (sizes[index] - stringLength(column)) || 0;
+            if (align[index] === '.') {
+                dotIndex = dotindex(column)
+                rightPad = dotsizes[index] + (+!column.includes('.')) - (stringLength(column) - dotIndex);
+                pad = ' '.repeat(dotsizes[index] - dotIndex)
+                return pad + column + ' '.repeat(rightPad >= 0 ? rightPad : 0);
+            }
+
+            pad = ' '.repeat(padLength >= 0 ? padLength : 0);
+            if (align[index] === 'r') {
                 return pad + column;
             }
 
             if (align[index] === 'c') {
-                const half = Math.ceil(padLength / 2);
-                return ' '.repeat(half) + column + ' '.repeat(padLength - half);
+                half = (padLength / 2) >> 0;
+                return ' '.repeat(padLength - half) + column + ' '.repeat(half);
             }
 
             return column + pad
